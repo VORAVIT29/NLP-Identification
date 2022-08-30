@@ -13,12 +13,8 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-light bg-light gradien">
     <nav class="navbar navbar-expand-lg navbar-light gradien">
         <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1">
-                <font size="7"><strong>NLP</strong></font>
-            </span>
             <div class="navbar-brand">
                 NLP
                 <!-- <img src="./static/nlp_image.png" alt="NLP" width="30" height="30"
@@ -54,7 +50,6 @@
     </li> -->
     </ul>
     <div class="container-fluid">
-    <div class="container">
         <div class="tab-content" id="myTabContent">
             <!-- page 1 -->
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -161,13 +156,10 @@
                 <form action="/pocess-spacy" method="post">
                     <div class="alert alert-info" role="alert">
                         <center>
-                            <h1>SPACY</h1>
                             <h1>NER</h1>
                         </center>
                         <div class="row">
                             <div class="col-6">
-                                <textarea class="form-control" name="nerText" id="" cols="20" rows="10"
-                                    placeholder="ใส่ข้อความ...." required></textarea>
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="input-group">
@@ -291,29 +283,12 @@
                             <!-- <div class="col-4">
                             <input type="file" class="form-control" name="nerFile" id="">
                         </div> -->
-                            <div class="col-2">
-                                <button type="submit" class="btn btn-outline-dark">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-search" viewBox="0 0 16 16">
-                                        <path
-                                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                                    </svg>
-                                    &nbsp;
-                                    Search
-                                </button>
-                            </div>
                         </div>
                     </div>
                 </form>
 
                 {% if result %}
                 <hr>
-                <div class="row" style="margin-top:25px;">
-                    <div class="col-12">
-                        <div class="alert alert-primary" role="alert" style="font-size: small;">
-                            <h4 class="alert-heading">Spacy</h4>
-                            <hr>
-                            {{ result|markdown }}
                 <div class="container">
                     <section style="background:#fff;">
                         <div class="row" style="margin-top:25px;">
@@ -325,92 +300,13 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
                         {% endif %}
                     </section>
                 </div>
-                {% endif %}
+
             </div>
             <!-- <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">contact</div> -->
         </div>
-
-        <!-- <div class="row">
-            <div class="col-12">
-                <textarea class="form-control" rows="10" readonly>
-                        {{ text }}
-                    </textarea>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-6">
-                <form action="/" method="post" enctype="multipart/form-data">
-                    <div class="row">
-                        <div class="col-10">
-                            <input class="form-control" type="file" name="fileName[]" multiple accept=".txt" required>
-                        </div>
-                        <div class="col-2">
-                            <input class="btn btn-primary" type="submit" value="เก็บไฟล์" />
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <br>
-            <form action="/search-text" method="post">
-                <div class="row">
-                    <div class="col-3" style="text-align:center; margin-top:10px;">
-                        <input class="btn btn-danger" type="submit" value="ตรวจสอบข้อมูล" />
-                    </div>
-                    <div class="col-9">
-                        <div class="form-floating mb-3">
-                            <input class="form-control" type="search" placeholder="ค้นหาคำ" name="search" required />
-                            <label for="floatingInput">ค้นหาข้อมูล</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    {% if text_search %}
-                    <div class="col-5">
-                        <strong> * {{ text_search }}</strong>
-                    </div>
-                    {% endif %}
-                </div>
-            </form>
-            <!-- <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">contact</div> -->
-        </div>
-        <div class="col-6">
-            <div class="row">
-                <div class="col-12">
-                    <center>
-                        <h3> Bag Of Words</h3>
-                    </center>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <textarea class="form-control" rows="10" readonly>
-                                {{ bagOfWords }}
-                            </textarea>
-                </div>
-            </div>
-            {% if tf_idf %}
-            <div class="row">
-                <div class="col-12">
-                    <center>
-                        <h3>TF-IDF</h3>
-                    </center>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <textarea class="form-control" rows="10" readonly>
-                                {{ tf_idf }}
-                            </textarea>
-                </div>
-            </div>
-            {% endif %}
-        </div> -->
     </div>
 
 
