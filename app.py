@@ -18,19 +18,23 @@ Session(app)
 
 @app.route('/')
 def index():
-    if os.path.isdir(session['dict']):
-        shutil.rmtree(session['dict'])
-        session['dict'] = '/clear-patch'
+    if 'dict' in session:
+        if os.path.isdir(session['dict']):
+            shutil.rmtree(session['dict'])
+            session.pop('dict', None)
+            # session['dict'] = '/clear-patch'
 
     return render_template('page.html')
 
 
 @app.route('/', methods=['POST'])
 def process():
-    if os.path.isdir(session['dict']):
-        print("rm", session['dict'])
-        shutil.rmtree(session['dict'])  # ลบ dictionary จำลอง
-        session['dict'] = '/clear-patch'
+    if 'dict' in session:
+        if os.path.isdir(session['dict']):
+            print("rm", session['dict'])
+            shutil.rmtree(session['dict'])  # ลบ dictionary จำลอง
+            session.pop('dict', None)
+            # session['dict'] = '/clear-patch'
 
     filenames = []
     # สร้าง dictionary จำลองมาเพื่อเปิดไฟล์
@@ -85,4 +89,4 @@ def re_spacy():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host="192.168.0.4", port=80)
