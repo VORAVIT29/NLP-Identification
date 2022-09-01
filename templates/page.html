@@ -154,10 +154,18 @@
                 <br>
 
                 <form action="/pocess-spacy" method="post">
-                    <div class="alert alert-info" role="alert">
-                        <center>
-                            <h1>NER</h1>
-                        </center>
+                    <div class="alert alert-light" role="alert" style="background-color:#4357ad">
+                        <div class="row">
+                            <div class="col-6">
+                                <h4 style="color:white;">Named-Entity Recognition</h4>
+                            </div>
+                            <div class="col-6">
+                                <h4 style="color:white;">Entity labels</h4>
+                            </div>
+                        </div>
+                        <!-- <center> -->
+                        <br>
+                        <!-- </center> -->
                         <div class="row">
                             <div class="col-6">
                                 <div class="row">
@@ -165,7 +173,7 @@
                                         <div class="input-group">
                                             <textarea class="form-control" name="nerText" id="" cols="20" rows="10"
                                                 placeholder="ใส่ข้อความ...." required></textarea>
-                                            <button type="submit" class="btn btn-secondary">
+                                            <button type="submit" class="btn btn-warning">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="240"
                                                     fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                                     <path
@@ -178,63 +186,88 @@
                             </div>
                             <div class="col-6">
                                 <div class="row">
+                                    <select class="form-select" name="check[]" multiple
+                                        aria-label="multiple select example" style="height:251px;" required>
+                                        <option selected value="all">เลือกทั้งหมด</option>
+                                        <option>PERSON</option>
+                                        <option>NORP</option>
+                                        <option>ORG</option>
+                                        <option>GPE</option>
+                                        <option>LOC</option>
+                                        <option>PRODUCT</option>
+                                        <option>EVENT</option>
+                                        <option value="work_of_art">WORK OF ART</option>
+                                        <option>LANGUAGE</option>
+                                        <option>DATE</option>
+                                        <option>TIME</option>
+                                        <option>PERCENT</option>
+                                        <option>MONEY</option>
+                                        <option>QUANTITY</option>
+                                        <option>ORDINAL</option>
+                                        <option>CARDINAL</option>
+                                    </select>
+                                </div>
+                                <!--<div class="row">
                                     <div class="col-3">
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="" id="person">
+                                            <input type="checkbox" class="form-check-input" id="person"
+                                                value="person" />
                                             <label class="form-check-label" for="person">
                                                 PERSON
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="" id="norp">
+                                            <input type="checkbox" class="form-check-input" id="norp" value="norp" />
                                             <label class="form-check-label" for="norp">
                                                 NORP
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="" id="org">
+                                            <input type="checkbox" class="form-check-input" name="org" id="org">
                                             <label class="form-check-label" for="org">
                                                 ORG
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="" id="gpe">
+                                            <input type="checkbox" class="form-check-input" name="gpe" id="gpe">
                                             <label class="form-check-label" for="gpe">
                                                 GPE
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="" id="loc">
+                                            <input type="checkbox" class="form-check-input" name="loc" id="loc">
                                             <label class="form-check-label" for="loc">
                                                 LOC
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="" id="product">
+                                            <input type="checkbox" class="form-check-input" name="product" id="product">
                                             <label class="form-check-label" for="product">
                                                 PRODUCT
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="" id="event">
+                                            <input type="checkbox" class="form-check-input" name="event" id="event">
                                             <label class="form-check-label" for="event">
                                                 EVENT
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="" id="work_of_art">
+                                            <input type="checkbox" class="form-check-input" name="work_of_art"
+                                                id="work_of_art">
                                             <label class="form-check-label" for="work_of_art">
                                                 WORK OF ART
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="" id="language">
+                                            <input type="checkbox" class="form-check-input" name="language"
+                                                id="language">
                                             <label class="form-check-label" for="language">
                                                 LANGUAGE
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="" id="date">
+                                            <input type="checkbox" class="form-check-input" name="date" id="date">
                                             <label class="form-check-label" for="date">
                                                 DATE
                                             </label>
@@ -242,44 +275,47 @@
                                     </div>
                                     <div class="col-3">
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="" id="time">
+                                            <input type="checkbox" class="form-check-input" name="time" id="time">
                                             <label class="form-check-label" for="time">
                                                 TIME
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="" id="percent">
+                                            <input type="checkbox" class="form-check-input" name="percent" id="percent">
                                             <label class="form-check-label" for="percent">
                                                 PERCENT
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="" id="money">
+                                            <input type="checkbox" class="form-check-input" name="money" id="money">
                                             <label class="form-check-label" for="money">
                                                 MONEY
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="" id="quantity">
+                                            <input type="checkbox" class="form-check-input" name="quantity"
+                                                id="quantity">
                                             <label class="form-check-label" for="quantity">
                                                 QUANTITY
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="" id="ordinal">
+                                            <input type="checkbox" class="form-check-input" name="ordinal" id="ordinal">
                                             <label class="form-check-label" for="ordinal">
                                                 ORDINAL
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="" id="cardinal">
+                                            <input type="checkbox" class="form-check-input" name="cardinal"
+                                                id="cardinal">
                                             <label class="form-check-label" for="cardinal">
                                                 CARDINAL
                                             </label>
                                         </div>
                                     </div>
-                                </div>
+                                </div>-->
                             </div>
+
                             <!-- <div class="col-4">
                             <input type="file" class="form-control" name="nerFile" id="">
                         </div> -->
@@ -287,7 +323,7 @@
                     </div>
                 </form>
 
-                {% if result %}
+                <!-- {% if result %} -->
                 <hr>
                 <div class="container">
                     <section>
@@ -296,11 +332,12 @@
                                 <div class="alert alert-primary" role="alert" style="font-size: small;">
                                     <h4 class="alert-heading">Spacy</h4>
                                     <hr>
-                                    {{ result|markdown }}
+                                    <!-- {{ result|markdown }} -->
+                                    {{ result }}
                                 </div>
                             </div>
                         </div>
-                        {% endif %}
+                        <!-- {% endif %} -->
                     </section>
                 </div>
             </div>
