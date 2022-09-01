@@ -1,5 +1,5 @@
 from werkzeug.utils import secure_filename
-from flask import Flask, render_template, request, redirect, session, url_for
+from flask import Flask, render_template, request, redirect, session, url_for, Markup
 from flask_session import Session
 from flaskext.markdown import Markdown
 import tempfile
@@ -7,6 +7,7 @@ import shutil
 import os
 import NLP.gen as nlp
 import NLP.Spacy as sp
+import socket
 
 
 app = Flask(__name__)
@@ -18,19 +19,23 @@ Session(app)
 
 @app.route('/')
 def index():
-    if os.path.isdir(session['dict']):
-        shutil.rmtree(session['dict'])
-        session['dict'] = '/clear-patch'
+    if 'dict' in session:
+        if os.path.isdir(session['dict']):
+            shutil.rmtree(session['dict'])
+            session.pop('dict', None)
+            # session['dict'] = '/clear-patch'
 
     return render_template('page.html')
 
 
 @app.route('/', methods=['POST'])
 def process():
-    if os.path.isdir(session['dict']):
-        print("rm", session['dict'])
-        shutil.rmtree(session['dict'])  # ลบ dictionary จำลอง
-        session['dict'] = '/clear-patch'
+    if 'dict' in session:
+        if os.path.isdir(session['dict']):
+            print("rm", session['dict'])
+            shutil.rmtree(session['dict'])  # ลบ dictionary จำลอง
+            session.pop('dict', None)
+            # session['dict'] = '/clear-patch'
 
     filenames = []
     # สร้าง dictionary จำลองมาเพื่อเปิดไฟล์
@@ -74,9 +79,11 @@ def search():
 def pocess_spacy():
     if request.method == 'POST':
         input_text = request.form.get('nerText')
-        convert_html = sp.pocess_spacy(input_text)
+        check_list = request.form.getlist('check[]')
+        # print(check_list)
+        convert_html = sp.pocess_spacy(input_text, check_list)
         # print(convert_html)
-    return render_template('page.html', result=convert_html)
+    return render_template('page.html', result=Markup(convert_html))
 
 
 @app.route('/pocess-spacy')
@@ -85,4 +92,7 @@ def re_spacy():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # get ip Address computer
+    ipAddr = socket.gethostbyname(socket.gethostname())
+    app.run(debug=True, host=ipAddr, port=80)
+    # app.run(debug=True)
