@@ -1,7 +1,7 @@
 from werkzeug.utils import secure_filename
 from flask import Flask, render_template, request, redirect, session, url_for, Markup
 from flask_session import Session
-from flaskext.markdown import Markdown
+# from flaskext.markdown import Markdown
 import tempfile
 import shutil
 import os
@@ -11,7 +11,7 @@ import socket
 
 
 app = Flask(__name__)
-Markdown(app)
+# Markdown(app)
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
@@ -23,7 +23,6 @@ def index():
         if os.path.isdir(session['dict']):
             shutil.rmtree(session['dict'])
             session.pop('dict', None)
-            # session['dict'] = '/clear-patch'
 
     return render_template('page.html')
 
@@ -35,12 +34,10 @@ def process():
             print("rm", session['dict'])
             shutil.rmtree(session['dict'])  # ลบ dictionary จำลอง
             session.pop('dict', None)
-            # session['dict'] = '/clear-patch'
 
     filenames = []
     # สร้าง dictionary จำลองมาเพื่อเปิดไฟล์
     tempdir = tempfile.mkdtemp(prefix="Tempdir")
-    # print(os.listdir(tempdir))
     form = request.files.getlist('fileName[]')
 
     for file in form:
@@ -53,7 +50,6 @@ def process():
         filenames.append(patch_save)
 
     session['dict'] = tempdir
-    # print("after", session['dict'])
     session['filename'] = filenames
     text_nlp = nlp.NLP(filenames)
     text = text_nlp.createToken()
@@ -67,7 +63,7 @@ def search_text():
     filenames = session['filename']
     list_nlp = nlp.NLP(filenames)
     text = list_nlp.createToken()
-    return render_template("page.html", text=text, text_search=list_nlp.searchText(search), bagOfWords=list_nlp.bag_of_words(), tf_idf=list_nlp.TfIdf())
+    return render_template("page.html", text=text, text_search=Markup(list_nlp.searchText(search)), bagOfWords=list_nlp.bag_of_words(), tf_idf=list_nlp.TfIdf())
 
 
 @app.route('/search-text')

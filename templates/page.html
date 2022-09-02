@@ -3,12 +3,15 @@
 
 <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href=".\static\style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="/static/css/style.css" />
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+
     <title>Py test</title>
 </head>
 
@@ -96,7 +99,8 @@
                             {% if text_search %}
                             <div class="row">
                                 <div class="col-12">
-                                    {{text_search|markdown}}
+                                    <!-- {{text_search|markdown}} -->
+                                    {{text_search}}
                                 </div>
                             </div>
                             {% endif %}
@@ -152,8 +156,8 @@
             <!-- page 2 -->
             <div class="tab-pane fade" id="ner" role="tabpanel" aria-labelledby="ner-tab">
                 <br>
-
-                <form action="/pocess-spacy" method="post">
+                <!-- action="/pocess-spacy" -->
+                <form method="post" id="process-spacy">
                     <div class="alert alert-light" role="alert" style="background-color:#4357ad">
                         <div class="row">
                             <div class="col-6">
@@ -171,9 +175,10 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="input-group">
-                                            <textarea class="form-control" name="nerText" id="" cols="20" rows="10"
-                                                placeholder="ใส่ข้อความ...." required></textarea>
-                                            <button type="submit" class="btn btn-warning">
+                                            <textarea class="form-control" name="nerText" id="nerText" cols="20"
+                                                rows="10" placeholder="ใส่ข้อความ...." required></textarea>
+                                            <button type="button" class="btn btn-warning" onclick="call_spacy()"
+                                                id="search">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="240"
                                                     fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                                     <path
@@ -323,7 +328,6 @@
                     </div>
                 </form>
 
-                <!-- {% if result %} -->
                 <hr>
                 <div class="container">
                     <section>
@@ -332,19 +336,17 @@
                                 <div class="alert alert-primary" role="alert" style="font-size: small;">
                                     <h4 class="alert-heading">Spacy</h4>
                                     <hr>
-                                    <!-- {{ result|markdown }} -->
-                                    {{ result }}
+                                    <span id="showSpacy">{{ result }}</span>
                                 </div>
                             </div>
                         </div>
-                        <!-- {% endif %} -->
                     </section>
                 </div>
             </div>
             <!-- <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">contact</div> -->
         </div>
     </div>
-
+    <script src="/static/js/call.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
@@ -353,5 +355,6 @@
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
         crossorigin="anonymous"></script>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
 </html>
