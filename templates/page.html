@@ -191,8 +191,7 @@
                             </div>
                             <div class="col-6">
                                 <div class="row">
-                                    <select class="form-select" name="check[]" multiple
-                                        aria-label="multiple select example" style="height:251px;" required>
+                                    <select class="form-select" id="check" multiple style="height:251px;" required>
                                         <option selected value="all">เลือกทั้งหมด</option>
                                         <option>PERSON</option>
                                         <option>NORP</option>
@@ -346,7 +345,6 @@
             <!-- <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">contact</div> -->
         </div>
     </div>
-    <script src="/static/js/call.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
@@ -355,6 +353,35 @@
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
         crossorigin="anonymous"></script>
 </body>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script> -->
+<script src="/static/js/call.js"></script>
+<!-- <script>
+    function call_spacy() {
+        var check = []
+        var result = ""
+        text = document.getElementsByName('nerText')[0].value
+        for (var iterator of document.getElementById('check').options) {
+            if (iterator.selected) {
+                check.push(iterator.value)
+            }
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/pocess-spacy",
+            data: {
+                'text': text,
+                'chEn': JSON.stringify(check), // convert list to Json string
+            },
+            success: function (data) {
+                result_text(data)
+            }
+        })
+    }
+
+    function result_text(result) {
+        document.getElementById('showSpacy').innerHTML = result
+    }
+</script> -->
 
 </html>

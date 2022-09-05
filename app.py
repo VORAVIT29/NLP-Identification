@@ -1,3 +1,4 @@
+import ast
 from werkzeug.utils import secure_filename
 from flask import Flask, render_template, request, redirect, session, url_for, Markup
 from flask_session import Session
@@ -74,12 +75,12 @@ def search():
 @app.route('/pocess-spacy', methods=['POST'])
 def pocess_spacy():
     if request.method == 'POST':
-        input_text = request.form.get('nerText')
-        check_list = request.form.getlist('check[]')
-        # print(check_list)
+        input_text = request.form.get('text')
+        check_list = request.form.getlist('chEn')[0]
+        check_list = ast.literal_eval(check_list)
+
         convert_html = sp.pocess_spacy(input_text, check_list)
-        # print(convert_html)
-    return render_template('page.html', result=Markup(convert_html))
+        return convert_html
 
 
 @app.route('/pocess-spacy')
