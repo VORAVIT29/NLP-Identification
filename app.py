@@ -64,7 +64,8 @@ def search_text():
     filenames = session['filename']
     list_nlp = nlp.NLP(filenames)
     text = list_nlp.createToken()
-    return render_template("page.html", text=text, text_search=Markup(list_nlp.searchText(search)), bagOfWords=list_nlp.bag_of_words(), tf_idf=list_nlp.TfIdf())
+
+    return list_nlp.searchText(search)
 
 
 @app.route('/search-text')
@@ -90,6 +91,6 @@ def re_spacy():
 
 if __name__ == '__main__':
     # get ip Address computer
-    ipAddr = socket.gethostbyname(socket.gethostname())
-    app.run(debug=True, host=ipAddr, port=80)
-    # app.run(debug=True)
+    # ipAddr = socket.gethostbyname(socket.gethostname())
+    # app.run(debug=True, host=ipAddr, port=80)
+    app.run(debug=True)
