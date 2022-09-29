@@ -8,7 +8,7 @@ import shutil
 import os
 import NLP.gen as nlp
 import NLP.Spacy as sp
-import socket
+import NLP.fackeNew as fn
 
 
 app = Flask(__name__)
@@ -60,7 +60,8 @@ def process():
 
 @app.route('/search-text', methods=['POST'])
 def search_text():
-    search = request.form.get('search')
+    search = str(request.form.get('search')).lower()
+    # search = str(search).lower()
     filenames = session['filename']
     list_nlp = nlp.NLP(filenames)
     text = list_nlp.createToken()
@@ -78,6 +79,7 @@ def pocess_spacy():
     if request.method == 'POST':
         input_text = request.form.get('text')
         check_list = request.form.getlist('chEn')[0]
+        # convert Json string to list
         check_list = ast.literal_eval(check_list)
 
         convert_html = sp.pocess_spacy(input_text, check_list)
@@ -86,6 +88,19 @@ def pocess_spacy():
 
 @app.route('/pocess-spacy')
 def re_spacy():
+    return redirect('/')
+
+
+@app.route('/flask-new', methods=['POST'])
+def process_flask_new():
+    if request.method == 'POST':
+        text = request.form.get('text_predict')
+        fack_new = fn.get_prediction(text, True)
+    return fack_new
+
+
+@app.route('/flask-new')
+def flask_new_re():
     return redirect('/')
 
 
