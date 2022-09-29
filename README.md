@@ -1,2 +1,2 @@
 # NLP-Identification
-กดไปที่ branches ที่ชื่อ Master เพราะมีข้อมูลอยู่
+ไฟล์ Model ยังไม่อยู่ใน git ต้องเอาไปโหลดมาใส่ครับ
