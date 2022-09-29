@@ -2,7 +2,7 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import pandas as pd
 
 # Get model after train
-model_patch = "./NLP/model/fake-news-dataset-mee-model"
+model_patch = "./model/fake-news-dataset-mee-model"
 
 model = AutoModelForSequenceClassification.from_pretrained(model_patch)
 tokenizer = AutoTokenizer.from_pretrained(model_patch)
