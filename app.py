@@ -1,6 +1,6 @@
 import ast
 from werkzeug.utils import secure_filename
-from flask import Flask, render_template, request, redirect, session, url_for, Markup
+from flask import Flask, render_template, request, redirect, session, Markup
 from flask_session import Session
 # from flaskext.markdown import Markdown
 import tempfile
@@ -9,6 +9,7 @@ import os
 import NLP.gen as nlp
 import NLP.Spacy as sp
 import NLP.fackeNew as fn
+import NLP.sentiment as sent
 
 
 app = Flask(__name__)
@@ -101,6 +102,19 @@ def process_flask_new():
 
 @app.route('/flask-new')
 def flask_new_re():
+    return redirect('/')
+
+
+@app.route('/sentiment', methods=['POST'])
+def process_sentiment():
+    if request.method == 'POST':
+        text = request.form.get('text_sentiment')
+        sentiment = sent.sentiment(text)
+    return sentiment
+
+
+@app.route('/sentiment')
+def sentiment_re():
     return redirect('/')
 
 

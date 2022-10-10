@@ -51,6 +51,7 @@ function chang_btn_disabled(class_anima, id_anima, dis_bool, html_id) {
     document.getElementById(html_id).disabled = dis_bool
 }
 
+// -------------------------------------- fake-new --------------------------------------
 function predict_fake() {
     let text_predict = document.getElementsByName('text_predict')[0].value
     chang_btn_disabled("spinner-border spinner-border-sm", "spinner_predict", true, 'btn_predict')
@@ -66,4 +67,19 @@ function predict_fake() {
             }
         })
     }, 3000);
+}
+
+function predict_sentiment() {
+    let value = document.getElementsByName('sentiment_name')[0].value;
+
+    setTimeout(() => {
+        $.ajax({
+            type: 'POST',
+            url: '/sentiment',
+            data: { 'text_sentiment': value },
+            success: (data) => {
+                document.getElementById('sent_result').innerHTML = data
+            }
+        })
+    }, 1000);
 }

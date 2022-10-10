@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 * {
-    font-family: 'Noto Sans Thai', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 .gradien {
