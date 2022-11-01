@@ -3,7 +3,6 @@ import pandas as pd
 
 # Get model after train
 model_patch = "./NLP/model/fake-news-dataset-mee-model"
-# D:\โปรแกรม\OneDrive - kmutnb.ac.th\Desktop\python\NLP-Identification\NLP\model
 model = AutoModelForSequenceClassification.from_pretrained(model_patch)
 tokenizer = AutoTokenizer.from_pretrained(model_patch)
 max_length = 512

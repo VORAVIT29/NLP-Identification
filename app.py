@@ -119,7 +119,5 @@ def sentiment_re():
 
 
 if __name__ == '__main__':
-    # get ip Address computer
-    # ipAddr = socket.gethostbyname(socket.gethostname())
-    # app.run(debug=True, host=ipAddr, port=80)
+    # app.run(debug=True, host="ipAddr", port=80)
     app.run(debug=True)
