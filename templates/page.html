@@ -10,13 +10,23 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <!-- CDN icon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <!-- icon  -->
-    <link rel="icon" href="./static/image/nlp_image.png" type="image/png" sizes="32x32">
+    <link rel=" icon" href="./static/image/nlp_image.png" type="image/png" sizes="32x32">
     <title>NLP</title>
+    <style>
+        .form-control:focus {
+            color: #212529;
+            /* background-color: #fff; */
+            border-color: #3F0071;
+            outline: 0;
+            box-shadow: 0 0 0 .25rem hsla(273, 100%, 22%, 0.5);
+        }
+    </style>
 </head>
 
 <body>
@@ -81,7 +91,8 @@
                                         required>
                                 </div>
                                 <div class="col-1">
-                                    <input class="btn btn-primary" type="submit" value="เก็บไฟล์" />
+                                    <input class="btn btn-dark" style="background: #532d72;" type="submit"
+                                        value="เก็บไฟล์" />
                                 </div>
                             </div>
                         </form>
@@ -90,7 +101,8 @@
                 <br>
                 <div class="row">
                     <div class="col-12">
-                        <textarea class="form-control" rows="10" readonly>
+                        <textarea class="form-control" rows="10" readonly
+                            style="transition: border-color #3F0071, .15s ease-in-out, box-shadow .15s ease-in-out">
                             {{ text }}
                         </textarea>
                     </div>
@@ -101,13 +113,15 @@
                         <div class="row">
                             <div class="col-5">
                                 <div class="form-floating mb-3">
-                                    <input class="form-control" type="search" placeholder="ค้นหาคำ" name="search"
-                                        required />
+                                    <input class="form-control" type="text" placeholder="ค้นหาคำ" name="search"
+                                        id="search"
+                                        onkeyup="(document.getElementsByName('search')[0].value.length>0)?document.getElementById('btn_search').disabled = false:document.getElementById('btn_search').disabled= true" />
                                     <label for="floatingInput">ค้นหาข้อมูล</label>
                                 </div>
                             </div>
                             <div class="col-1" style="text-align:center; margin-top:10px;width:auto">
-                                <button class="btn btn-danger" onclick="search_text()" id="btn_search">
+                                <button class="btn btn-dark" style="background: #532d72;" onclick="search_text()"
+                                    disabled id="btn_search">
                                     <span id="spinner"></span>
                                     ตรวจสอบข้อมูล
                                 </button>
@@ -156,7 +170,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-12 mb-5">
                                 <textarea class="form-control" rows="10" readonly>
                                     {{ tf_idf }}
                                 </textarea>
@@ -190,30 +204,11 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="input-group">
-                                            <input type="file" class="form-control" id="inputGroupFile04"
-                                                aria-describedby="inputGroupFileAddon04" aria-label="Upload" disabled
-                                                title="ปุ่มอัพโหลด เปิดใช้ในเร็วๆนี้">
-                                            <button class="btn btn-outline-warning" type="button"
-                                                id="inputGroupFileAddon04" disabled>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                    fill="currentColor" class="bi bi-arrow-bar-down"
-                                                    viewBox="0 0 16 16">
-                                                    <path fill-rule="evenodd"
-                                                        d="M1 3.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5zM8 6a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 .708-.708L7.5 12.293V6.5A.5.5 0 0 1 8 6z" />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="input-group">
                                             <textarea class="form-control" name="nerText" id="nerText" cols="20"
-                                                rows="10" placeholder="ใส่ข้อความ...." required style="height: 189px;"
-                                                onchange="check_text_input()"></textarea>
+                                                rows="10" placeholder="ใส่ข้อความ...." required style="height:251px;"
+                                                onkeyup="check_text_input()"></textarea>
                                             <button type="button" class="btn btn-warning" onclick="call_spacy()"
-                                                id="search" disabled>
+                                                id="search-ner" disabled>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
                                                     fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                                     <path
@@ -402,42 +397,58 @@
             <!-- page 3 -->
             <!-- <div class="tab-pane fade" id="fakeNew" role="tabpanel" aria-labelledby="contact-tab"> -->
             <div class="page" id="fakeNew" style="display:none;">
-                <div class="container">
-                    Fake News Detection
+                <div class="container mt-3">
+                    <h1>
+                        <img src="https://cdn-icons-png.flaticon.com/512/4410/4410262.png" alt="fakeNew" width="80">
+                        FAKE NEWS DETECTION
+                    </h1>
                     <hr>
-                    <div class="row" style="margin-bottom: 1%;">
-                        <div class="col-12">
-                            <textarea name="text_predict" class="form-control" cols="30" rows="10"></textarea>
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                            <textarea name="text_predict" class="form-control" cols="30" rows="10"
+                                placeholder="ใส่ข้อความ..."></textarea>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12">
-                            <button class="btn btn-success" onclick="predict_fake()" id="btn_predict">
-                                <span id="spinner_predict"></span>
+                        <div class="col-12 mb-3">
+                            <button class="btn btn-dark btn-lg" style="background: #532d72;" onclick="predict_fake()"
+                                id="btn_predict">
+                                <i class="bi bi-search"></i>
+                                &nbsp;
                                 Prediction
+                                <span id="spinner_predict"></span>
                             </button>
                         </div>
                     </div>
-                    <span id="resulte-predict"></span>
+                    <div class="alert alert-light" role="alert" style=" border-radius: 3.25rem;background: #9d6ec1;">
+                        <center>
+                            <div class="col">
+                                <img src="https://cdn-icons-png.flaticon.com/512/2123/2123444.png" alt="new" width="150"
+                                    id="news">
+                                <img src="https://cdn-icons-png.flaticon.com/512/2374/2374003.png" alt="new" width="150"
+                                    id="fake-new">
+                            </div>
+                            <div class="col">
+                                <span id="resulte-predict"></span>
+                            </div>
+                        </center>
+                    </div>
                 </div>
             </div>
 
             <!-- page 4 -->
             <!-- <div class="tab-pane fade" id="sentiment" role="tabpanel" aria-labelledby="contact-tab"> -->
             <div class="page" id="sentiment" style="display:none;">
-                <br>
-
-                <div class="container-fluid">
-                    Sentiment
+                <div class="container-fluid mt-3">
+                    <h1>
+                        <img src="https://cdn-icons-png.flaticon.com/512/3203/3203887.png" width="80" alt="SENTIMENT">
+                        SENTIMENT
+                    </h1>
                     <hr>
                     <div class="row row-cols-3">
                         <div class="col">
                             <div class="alert alert-danger d-flex align-items-center" role="alert">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-emoji-frown-fill" viewBox="0 0 16 16">
-                                    <path
-                                        d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm-2.715 5.933a.5.5 0 0 1-.183-.683A4.498 4.498 0 0 1 8 9.5a4.5 4.5 0 0 1 3.898 2.25.5.5 0 0 1-.866.5A3.498 3.498 0 0 0 8 10.5a3.498 3.498 0 0 0-3.032 1.75.5.5 0 0 1-.683.183zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z" />
-                                </svg>
+                                <i class="bi bi-emoji-frown-fill"></i>
                                 &nbsp;
                                 <div>
                                     Negative
@@ -446,11 +457,7 @@
                         </div>
                         <div class="col">
                             <div class="alert alert-success d-flex align-items-center" role="alert">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-emoji-smile-fill" viewBox="0 0 16 16">
-                                    <path
-                                        d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z" />
-                                </svg>
+                                <i class="bi bi-emoji-smile-fill"></i>
                                 &nbsp;
                                 <div>
                                     Positive
@@ -459,11 +466,7 @@
                         </div>
                         <div class="col">
                             <div class="alert alert-warning d-flex align-items-center" role="alert">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-emoji-neutral-fill" viewBox="0 0 16 16">
-                                    <path
-                                        d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm-3 4a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z" />
-                                </svg>
+                                <i class="bi bi-emoji-neutral-fill"></i>
                                 &nbsp;
                                 <div>
                                     Neutral
@@ -482,14 +485,31 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <button class="btn btn-warning" onclick="predict_sentiment()">Predict</button>
+                            <button class="btn btn-dark btn-lg" style="background: #532d72;" id="btn_predict_sentiment"
+                                onclick="predict_sentiment()">
+                                <i class="bi bi-search"></i>
+                                &nbsp;
+                                Predict
+                                <span id="spinner_predict_sentiment"></span>
+                            </button>
                             &nbsp;
-                        </div>
-                        <div class="col">
-                            <span id="sent_result"></span>
                         </div>
                     </div>
                     <hr>
+                    <div class="row">
+                        <div class="col mt-3">
+                            <span>
+                                <div class="alert alert-secondary" id="box-result">
+                                    <div class="row">
+                                        <div class="col mb-1" id="title-result">
+                                            Sentiment
+                                        </div>
+                                        <div id="sent_result"></div>
+                                    </div>
+                                </div>
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
