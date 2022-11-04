@@ -13,7 +13,7 @@ pip install<br>
 - textblob<br>
 - spacy<br>
 
-͸Ժ�¡�÷ӧҹ<br>
+อธิบายการทำงาน<br>
 
 - Bow<br>
   <img src=".\static\image\bow.png"><br>
