@@ -1,5 +1,5 @@
 # NLP-Identification
-
+Run app.py (รันไฟล์) โดย ctrl + F5
 pip install<br>
 
 - Flask<br>
