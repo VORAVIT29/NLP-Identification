@@ -1,7 +1,5 @@
-__pycache__
+/__pycache__
 
-NLP/model/
-
-.gitignore
+/NLP/model/
 
 flask_session
