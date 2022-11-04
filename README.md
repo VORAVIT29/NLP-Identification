@@ -1,6 +1,7 @@
 # NLP-Identification
 
 pip install<br>
+
 - Flask<br>
 - Jinja2<br>
 - werkzeug<br>
@@ -11,3 +12,14 @@ pip install<br>
 - nltk<br>
 - textblob<br>
 - spacy<br>
+
+อธิบายการทำงาน<br>
+
+- Bow<br>
+  <img src=".\static\image\bow.png"><br>
+- Ner<br>
+  <img src=".\static\image\ner.png"><br>
+- Fake New<br>
+  <img src=".\static\image\fake-new.png"><br>
+- Sentiment<br>
+  <img src=".\static\image\sentiment.png"><br>
