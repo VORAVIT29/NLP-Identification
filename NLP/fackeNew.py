@@ -1,5 +1,4 @@
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
-import pandas as pd
 
 # Get model after train
 model_patch = "./NLP/model/fake-news-dataset-mee-model"

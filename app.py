@@ -1,8 +1,7 @@
 import ast
 from werkzeug.utils import secure_filename
-from flask import Flask, render_template, request, redirect, session, Markup
+from flask import Flask, render_template, request, redirect, session
 from flask_session import Session
-# from flaskext.markdown import Markdown
 import tempfile
 import shutil
 import os
@@ -13,7 +12,6 @@ import NLP.sentiment as sent
 
 
 app = Flask(__name__)
-# Markdown(app)
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
